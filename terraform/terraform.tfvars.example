@@ -1,0 +1,34 @@
+# Copy to terraform.tfvars (gitignored) for local `terraform plan/apply` runs.
+# In CI, these are passed as -var flags sourced from GitHub Secrets.
+
+aws_region          = "ap-south-1"
+project_name        = "stellar-global"
+environment         = "prod"
+domain_name         = "stellarglobalsupplies.com"
+app_subdomain       = "ops"
+
+# Route53 hosted zone ID for stellarglobalsupplies.com
+route53_zone_id     = "Z0123456789ABCDEFGHIJ"
+
+# ACM certificate MUST be issued in us-east-1 for CloudFront, covering
+# ops.stellarglobalsupplies.com
+acm_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# Google Gemini API key (free tier) — https://aistudio.google.com/app/apikey
+gemini_api_key      = "AIza..."
+
+# ─────────────────────────────────────────────────────────────────────────
+# Google OAuth 2.0 — for the Executive Assistant agent's Calendar/Gmail access
+# ─────────────────────────────────────────────────────────────────────────
+# 1. Go to https://console.cloud.google.com/apis/credentials
+# 2. Create OAuth client ID -> Application type: "Web application"
+# 3. IMPORTANT: after the first `terraform apply`, run
+#       terraform output google_oauth_redirect_uri
+#    and add that exact URL to "Authorized redirect URIs" on this client,
+#    then re-apply if the value changed.
+# 4. Enable the Google Calendar API and Gmail API for this project
+#    (APIs & Services -> Library)
+# 5. On the OAuth consent screen, add the personal Google account that will
+#    be connected as a "Test user" (if the app is in Testing mode)
+google_oauth_client_id     = "xxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
+google_oauth_client_secret = "GOCSPX-xxxxxxxxxxxxxxxxxxxxxxxx"

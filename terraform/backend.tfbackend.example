@@ -1,0 +1,11 @@
+# Copy this file to backend.tfbackend (gitignored) and fill in real values,
+# or pass these as -backend-config flags during `terraform init` (as done
+# automatically by .github/workflows/deploy.yml using GitHub Secrets).
+#
+# Usage:
+#   terraform init -backend-config=backend.tfbackend
+
+bucket         = "your-terraform-state-bucket"
+region         = "ap-south-1"
+dynamodb_table = "your-terraform-lock-table"
+encrypt        = true

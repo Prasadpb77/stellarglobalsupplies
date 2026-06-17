@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sidebar-width: 260px;
+    --sidebar-collapsed-width: 64px;
+    --header-height: 60px;
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-slate-700;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    @apply bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-xl;
+  }
+
+  /* Glow effect for agent avatars */
+  .avatar-glow {
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+
+  /* Typing animation for AI streaming */
+  .typing-cursor::after {
+    content: '▋';
+    animation: blink 1s step-start infinite;
+    @apply text-indigo-400;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  /* KPI card hover */
+  .kpi-card {
+    @apply glass-card p-5 transition-all duration-200 hover:border-slate-600 hover:bg-slate-800/80;
+  }
+}
+
+@layer utilities {
+  .safe-top    { padding-top:    env(safe-area-inset-top); }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-left   { padding-left:   env(safe-area-inset-left); }
+  .safe-right  { padding-right:  env(safe-area-inset-right); }
+
+  /* Scrollable chat area */
+  .chat-scroll {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hide scrollbar but keep scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+}
